@@ -1,0 +1,35 @@
+{
+  "width": 390,
+  "height": 269,
+  "cx": [
+    [ "UTILISATEUR", 56 ],
+    [ "AJOUTE", 166 ],
+    [ "CREER", 56 ],
+    [ "CARTE", 166 ],
+    [ "POSSEDE", 264 ],
+    [ "LABEL", 357 ],
+    [ "LISTE", 56 ],
+    [ "CONTIENT", 166 ]
+  ],
+  "cy": [
+    [ "UTILISATEUR", 51 ],
+    [ "AJOUTE", 51 ],
+    [ "CREER", 143 ],
+    [ "CARTE", 143 ],
+    [ "POSSEDE", 143 ],
+    [ "LABEL", 143 ],
+    [ "LISTE", 235 ],
+    [ "CONTIENT", 235 ]
+  ],
+  "shift": [
+    [ "AJOUTE,UTILISATEUR,0", 0 ],
+    [ "AJOUTE,CARTE,0", 0 ],
+    [ "CREER,UTILISATEUR,0", 0 ],
+    [ "CREER,LISTE,0", 0 ],
+    [ "POSSEDE,CARTE,0", 0 ],
+    [ "POSSEDE,LABEL,0", 0 ],
+    [ "CONTIENT,LISTE,0", 0 ],
+    [ "CONTIENT,CARTE,0", 0 ]
+  ],
+  "ratio": []
+}

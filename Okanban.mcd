@@ -1,0 +1,14 @@
+UTILISATEUR: email, nom, mot de passe
+AJOUTE, 0N UTILISATEUR, 0N CARTE
+:
+:
+
+CREER, 0N UTILISATEUR,0N LISTE
+CARTE: titre, position, couleur
+POSSEDE, 0N CARTE, 0N LABEL
+LABEL: titre
+
+LISTE: nom
+CONTIENT, 0N LISTE ,0N CARTE
+:
+:
