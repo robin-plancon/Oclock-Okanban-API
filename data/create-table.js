@@ -4,7 +4,7 @@ require('dotenv').config();
 // un require va executer le code du module ciblé
 const sequelize = require('../app/database');
 // on définit déjà les modèles, sans ça impossible pour sequelize de les connaitre
-const { Product, Brand, Category } = require('../app/models');
+const { List, Card, Tag } = require('../app/models');
 
 const db = {
 	create: async () => {
@@ -19,32 +19,34 @@ const db = {
 	},
 	seeding: async () => {
 		try {
-			const cd = await Product.create({
-				title: 'CD',
-				description: "Le morceau de l'été",
+			const enCours = await List.create({
+				name: 'En Cours',
+				position: 1,
 			});
-			const k7 = await Product.create({
-				title: 'Cassette',
-				description: 'Nostalgie',
+			const fini = await List.create({
+				name: 'Fini',
+				position: 2,
 			});
-			const universal = await Brand.create({
-				name: 'Univerval',
+			const test1 = await Card.create({
+				name: 'test1',
+				position: 1,
 			});
-			const audio = await Category.create({
-				name: 'Audio',
+			const test2 = await Card.create({
+				name: 'test',
+				position: 1,
 			});
-			const video = await Category.create({
-				name: 'Video',
+			const tag1 = await Tag.create({
+				name: 'tag1',
 			});
-			const nouveau = await Category.create({
-				name: 'Nouveau',
+			const tag2 = await Tag.create({
+				name: 'tag2',
 			});
 
-			cd.setBrand(universal);
-			cd.addCategory([audio, nouveau]);
-
-			k7.setBrand(universal);
-			k7.addCategory(audio);
+			enCours.addCard(test1);
+			fini.addCard(test2);
+			test1.addTag(tag1);
+			test1.addTag(tag2);
+			test2.addTag(tag1);
 		} catch (error) {
 			console.log(error);
 		}
