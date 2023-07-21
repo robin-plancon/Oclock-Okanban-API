@@ -1,0 +1,12 @@
+{
+  "name": "Yost",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:O-clock-Yost/S06-Thomas-Sensei.git",
+  "author": "Thomas Tridon <ttridon.pro@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "pg": "^8.11.1",
+    "sequelize": "^6.32.1"
+  }
+}
