@@ -30,10 +30,12 @@ const db = {
 			const test1 = await Card.create({
 				name: 'test1',
 				position: 1,
+				list_id: enCours.id,
 			});
 			const test2 = await Card.create({
 				name: 'test',
 				position: 1,
+				list_id: fini.id,
 			});
 			const tag1 = await Tag.create({
 				name: 'tag1',
