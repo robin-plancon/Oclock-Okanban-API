@@ -5,13 +5,13 @@ const express = require('express');
 const app = express();
 
 // Local imports
-// const router = require('./app/routers');
+const router = require('./app/router');
 
 // Body parser
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 // Nos Routes
-// app.use(router);
+app.use(router);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
