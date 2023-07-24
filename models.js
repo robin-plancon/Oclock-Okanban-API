@@ -50,7 +50,7 @@ Tag.init({
     color: DataTypes.STRING
 }, {
     sequelize,
-    tableName: "card"
+    tableName: "tag"
 });
 
 // Les associations
