@@ -29,9 +29,11 @@ const cardController = {
 
 	// Méthode pour récupérer une carte par son id
 	async getCard(req, res) {
-		const id = parseInt(req.params.id, 10);
+		const { id } = req.params;
 		try {
-			const data = await Card.findByPk(id);
+			const data = await Card.findByPk(id, {
+				include: 'tags',
+			});
 			if (!data) {
 				return res.status(404).json({ error: 'Card not found' });
 			}
@@ -59,11 +61,19 @@ const cardController = {
 
 	// Méthode pour mettre à jour une carte
 	async updateCard(req, res) {
-		const id = parseInt(req.params.id, 10);
+		const { id } = req.params;
+		const { name, position, list_id: listId } = req.body;
 		try {
-			const data = await Card.update(req.body, {
-				where: { id },
-			});
+			const data = await Card.update(
+				{
+					name,
+					position,
+					listId,
+				},
+				{
+					where: { id },
+				}
+			);
 			if (!data) {
 				return res.status(400).json({ error: 'Card not updated' });
 			}
@@ -75,7 +85,7 @@ const cardController = {
 
 	// Méthode pour supprimer une carte
 	async deleteCard(req, res) {
-		const id = parseInt(req.params.id, 10);
+		const { id } = req.params;
 		try {
 			const data = await Card.destroy({
 				where: { id },
