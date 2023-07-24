@@ -18,8 +18,14 @@ const cardController = {
 
 	// Méthode pour créer une carte
 	async createCard(req, res) {
+		const { name, position, color, list_id} = req.body;
 		try {
-			const data = await Card.create(req.body);
+			const data = await Card.create({
+				name,
+				position,
+				color,
+				list_id,
+			});
 			if (!data) {
 				return res.status(400).json({ error: 'Card not created' });
 			}
@@ -65,13 +71,13 @@ const cardController = {
 	// Méthode pour mettre à jour une carte
 	async updateCard(req, res) {
 		const { id } = req.params;
-		const { name, position, list_id: listId } = req.body;
+		const { name, position, list_id } = req.body;
 		try {
 			const data = await Card.update(
 				{
 					name,
 					position,
-					listId,
+					list_id,
 				},
 				{
 					where: { id },

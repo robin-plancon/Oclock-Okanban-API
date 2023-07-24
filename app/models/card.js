@@ -16,7 +16,7 @@ Card.init(
 		color: {
 			type: DataTypes.STRING,
 		},
-		listId: {
+		list_id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},

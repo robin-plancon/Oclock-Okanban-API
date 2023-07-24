@@ -46,9 +46,9 @@ const db = {
 
 			enCours.addCard(test1);
 			fini.addCard(test2);
-			test1.addTag(tag1);
-			test1.addTag(tag2);
-			test2.addTag(tag1);
+			test1.addTagCards(tag1);
+			test1.addTagCards(tag2);
+			test2.addTagCards(tag1);
 		} catch (error) {
 			console.log(error);
 		}

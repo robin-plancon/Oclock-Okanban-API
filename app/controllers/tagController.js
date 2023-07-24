@@ -18,7 +18,7 @@ const tagController = {
 	async createTag(req, res) {
 		const { name } = req.body;
 		try {
-			const data = await Tag.create(name);
+			const data = await Tag.create({ name });
 			if (!data) {
 				return res.status(400).json({ error: 'Tag not created' });
 			}
