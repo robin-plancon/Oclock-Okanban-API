@@ -41,6 +41,22 @@ const cardController = {
 		}
 	},
 
+	// Méthode pour récupérer toutes les cartes d'une liste
+	async getCardsByListId(req, res) {
+		const { id } = req.params;
+		try {
+			const cards = await Card.findAll({
+				where: { list_id: id },
+			});
+			if (!cards) {
+				return res.status(404).json({ error: 'No cards found' });
+			}
+			return res.status(200).json(cards);
+		} catch (error) {
+			return res.status(500).json({ error: error.message });
+		}
+	},
+
 	// Méthode pour mettre à jour une carte
 	async updateCard(req, res) {
 		const id = parseInt(req.params.id, 10);

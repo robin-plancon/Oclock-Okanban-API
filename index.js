@@ -7,8 +7,8 @@ const app = express();
 // Local imports
 const router = require('./app/router');
 
-// Body parser
-app.use(express.urlencoded({ extended: true }));
+// Middleware
+app.use(express.json());
 
 // Nos Routes
 app.use(router);
