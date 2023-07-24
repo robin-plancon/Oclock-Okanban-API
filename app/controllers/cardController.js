@@ -4,7 +4,9 @@ const cardController = {
 	// Méthode pour récupérer toutes les cartes
 	async getCards(req, res) {
 		try {
-			const data = await Card.findAll();
+			const data = await Card.findAll({
+				include: 'tagCards',
+			});
 			if (!data) {
 				return res.status(404).json({ error: 'No cards found' });
 			}
@@ -32,7 +34,7 @@ const cardController = {
 		const { id } = req.params;
 		try {
 			const data = await Card.findByPk(id, {
-				include: 'tags',
+				include: 'tagCards',
 			});
 			if (!data) {
 				return res.status(404).json({ error: 'Card not found' });
@@ -49,6 +51,7 @@ const cardController = {
 		try {
 			const cards = await Card.findAll({
 				where: { list_id: id },
+				include: 'tagCards',
 			});
 			if (!cards) {
 				return res.status(404).json({ error: 'No cards found' });

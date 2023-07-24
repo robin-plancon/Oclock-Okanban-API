@@ -4,8 +4,16 @@ const listController = {
 	// Méthode pour récupérer toutes les listes
 	async getLists(req, res) {
 		try {
-			const data = await List.findAll();
-			console.log(data);
+			const data = await List.findAll({
+				include: {
+					association: 'cards',
+					include: 'tagCards',
+				},
+				order: [
+					['position', 'ASC'],
+					['cards', 'position', 'DESC'],
+				],
+			});
 			if (!data) {
 				return res.status(404).json({ error: 'No lists found' });
 			}
@@ -17,8 +25,12 @@ const listController = {
 
 	// Méthode pour créer une liste
 	async createList(req, res) {
+		const { name, position } = req.body;
 		try {
-			const data = await List.create(req.body);
+			const data = await List.create({
+				name,
+				position,
+			});
 			if (!data) {
 				return res.status(400).json({ error: 'List not created' });
 			}
@@ -30,9 +42,15 @@ const listController = {
 
 	// Méthode pour récupérer une liste par son id
 	async getList(req, res) {
-		const id = parseInt(req.params.id, 10);
+		const { id } = req.params;
 		try {
-			const data = await List.findByPk(id);
+			const data = await List.findByPk(id, {
+				include: {
+					association: 'cards',
+					include: 'tagCards',
+				},
+				order: [['cards', 'position', 'DESC']],
+			});
 			if (!data) {
 				return res.status(404).json({ error: 'List not found' });
 			}
@@ -44,11 +62,18 @@ const listController = {
 
 	// Méthode pour mettre à jour une liste
 	async updateList(req, res) {
-		const id = parseInt(req.params.id, 10);
+		const { id } = req.params;
+		const { name, position } = req.body;
 		try {
-			const data = await List.update(req.body, {
-				where: { id },
-			});
+			const data = await List.update(
+				{
+					name,
+					position,
+				},
+				{
+					where: { id },
+				}
+			);
 			if (!data) {
 				return res.status(400).json({ error: 'List not updated' });
 			}
@@ -60,7 +85,7 @@ const listController = {
 
 	// Méthode pour supprimer une liste
 	async deleteList(req, res) {
-		const id = parseInt(req.params.id, 10);
+		const { id } = req.params;
 		try {
 			const data = await List.destroy({
 				where: { id },

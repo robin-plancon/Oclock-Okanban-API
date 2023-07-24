@@ -1,4 +1,4 @@
-const { Tag } = require('../models');
+const { Tag, Card } = require('../models');
 
 const tagController = {
 	// Méthode pour récupérer tous les tags
@@ -16,8 +16,9 @@ const tagController = {
 
 	// Méthode pour créer un tag
 	async createTag(req, res) {
+		const { name } = req.body;
 		try {
-			const data = await Tag.create(req.body);
+			const data = await Tag.create(name);
 			if (!data) {
 				return res.status(400).json({ error: 'Tag not created' });
 			}
@@ -29,7 +30,7 @@ const tagController = {
 
 	// Méthode pour récupérer un tag par son id
 	async getTag(req, res) {
-		const id = parseInt(req.params.id, 10);
+		const { id } = req.params;
 		try {
 			const data = await Tag.findByPk(id);
 			if (!data) {
@@ -43,11 +44,17 @@ const tagController = {
 
 	// Méthode pour mettre à jour un tag
 	async updateTag(req, res) {
-		const id = parseInt(req.params.id, 10);
+		const { id } = req.params;
+		const { name } = req.body;
 		try {
-			const data = await Tag.update(req.body, {
-				where: { id },
-			});
+			const data = await Tag.update(
+				{
+					name,
+				},
+				{
+					where: { id },
+				}
+			);
 			if (!data) {
 				return res.status(400).json({ error: 'Tag not updated' });
 			}
@@ -59,7 +66,7 @@ const tagController = {
 
 	// Méthode pour supprimer un tag
 	async deleteTag(req, res) {
-		const id = parseInt(req.params.id, 10);
+		const { id } = req.params;
 		try {
 			const data = await Tag.destroy({
 				where: { id },
@@ -68,6 +75,44 @@ const tagController = {
 				return res.status(400).json({ error: 'Tag not deleted' });
 			}
 			return res.status(200).json({ message: 'Tag deleted' });
+		} catch (error) {
+			return res.status(500).json({ error: error.message });
+		}
+	},
+
+	// Méthode pour ajouter un tag à une carte
+	async addTagToCard(req, res) {
+		const { id, tagId } = req.params;
+		try {
+			const card = await Card.findByPk(id);
+			if (!card) {
+				return res.status(404).json({ error: 'Card not found' });
+			}
+			const tag = await Tag.findByPk(tagId);
+			if (!tag) {
+				return res.status(404).json({ error: 'Tag not found' });
+			}
+			const data = await card.addTagCards(tag);
+			return res.status(200).json(data);
+		} catch (error) {
+			return res.status(500).json({ error: error.message });
+		}
+	},
+
+	// Méthode pour supprimer un tag d'une carte
+	async removeTagFromCard(req, res) {
+		const { id, tagId } = req.params;
+		try {
+			const card = await Card.findByPk(id);
+			if (!card) {
+				return res.status(404).json({ error: 'Card not found' });
+			}
+			const tag = await Tag.findByPk(tagId);
+			if (!tag) {
+				return res.status(404).json({ error: 'Tag not found' });
+			}
+			const data = await card.removeTagCards(tag);
+			return res.status(200).json(data);
 		} catch (error) {
 			return res.status(500).json({ error: error.message });
 		}
