@@ -53,9 +53,9 @@ CREATE TABLE "card_has_tag" (
 );
 
 -- On a créé notre BDD, on passe au SEEDING:
-INSERT INTO "list" ("name", "position") VALUES ('Liste 1', 1);
+INSERT INTO "list" ("name", "position") VALUES ('Liste 1', 2), ('Liste 2', 1);
 
-INSERT INTO "card" ("name", "position", "list_id") VALUES ('Carte 1', 1, 1), ('Carte 2', 1, 1);
+INSERT INTO "card" ("name", "position", "list_id") VALUES ('Carte 1', 1, 1), ('Carte 2', 2, 1);
 
 INSERT INTO "tag" ("name") VALUES ('Tag 1');
 
