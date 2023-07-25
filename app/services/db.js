@@ -18,7 +18,8 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
         underscored: true,
         // On précise le nom a utiliser lorsque Sequelize crée les timestamps.
         createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        updatedAt: 'updated_at',
+        logging: false
     }
 });
 
