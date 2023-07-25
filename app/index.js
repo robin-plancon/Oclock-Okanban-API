@@ -4,6 +4,8 @@ require('dotenv').config(); // Equivalent à écrire const dotenv = require('dot
 // Si je require un dossier, node va automatiquement chercher un fichier avec le nom index.js.
 const routers = require('./routers');
 
+const PORT = process.env.PORT || 3000;
+
 const app = express();
 
 // Permet de récupérer le body (sous forme de FormData) dans les requêtes et de le rendre disponible via req.body.
@@ -13,6 +15,6 @@ app.use(express.json());
 
 app.use(routers);
 
-app.listen(3000, () => {
-    console.log('Listening on: http://localhost:3000');
+app.listen(PORT, () => {
+    console.log(`Listening on: http://localhost:${PORT}`);
 })
