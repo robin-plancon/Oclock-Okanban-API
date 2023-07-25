@@ -1,6 +1,9 @@
 {
   "name": "s06e01-okanban-api-robin-plancon",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.x"
+  },
   "description": "## User Stories",
   "main": "index.js",
   "directories": {
