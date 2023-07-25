@@ -1,24 +1,7 @@
 // Sequelize nous permet de manipuler nos BDDs, mais sous formes d'objets, donc avec des méthodes (méthode = Une fonction définie dans un objet).
 // J'importe le module depuis les node_modules (ne pas oublier de l'installer).
-const { Sequelize, DataTypes, Model } = require('sequelize');
-
-// Première étape, je crée une connexion avec ma BDD via Sequelize.
-// new permet de créer une nouvelle instance d'une classe. Ex: j'ai une classe Guerrier, avec new je crée un nouveau personnage qui sera de type guerrier.
-// Dans l'ordre on renseigne: le nom de la bdd, le nom de l'utilisateur, le mot de passe.
-const sequelize = new Sequelize('okanban', 'okanban', 'okanban', {
-    // Je précise l'adresse du serveur, pour nous c'est en localhost.
-    host: 'localhost',
-    // J'annonce le type de la BDD, pour nous c'est postgres.
-    dialect: 'postgres',
-    // Le define permet de configurer le fonctionnement de Sequelize.
-    define: {
-        // Par défaut Sequelize fonction en kamelCase, alors que nous on travaille en snake_case. On active donc cette option pour passer en snake_case.
-        underscored: true,
-        // On précise le nom a utiliser lorsque Sequelize crée les timestamps.
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
-    }
-});
+const { DataTypes, Model } = require('sequelize');
+const sequelize = require("./db");
 
 // Cette ligne nous permet de récupérer par héritage toutes les méthodes définies dans la Classe Model (qui est fourni par le module sequelize).
 class List extends Model { };

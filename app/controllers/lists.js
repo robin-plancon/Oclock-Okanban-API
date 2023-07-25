@@ -66,13 +66,32 @@ const controller = {
                     // Je dis à Sequelize d'organiser mes listes dans un ordre croissant selon leur position (la propriété position).
                     ['position', 'ASC'],
                     // Même chose, mais pour les cartes. Je précise le tableau à trier en rajoutant un troisième paramètre (rajouté en première position).
-                    ['cards', 'position', 'DESC']
+                    ['cards', 'position', 'ASC']
                 ]
             });
             // Ici, on renvoit les données récupérées depuis la BDD (avec sequelize). On les renvoit sous forme JSON.
             res.json(lists);
         } catch (error) {
             // console.log(error);
+            res.status(500).json(error.toString());
+        }
+    },
+    getListCards: async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            const list = await List.findByPk(id, {
+                include: {
+                    association: "cards",
+                    include: "tags"
+                },
+                order: [
+                    ['cards', 'position', 'ASC']
+                ]
+            });
+
+            res.json(list);
+        } catch (error) {
             res.status(500).json(error.toString());
         }
     },
@@ -88,7 +107,8 @@ const controller = {
             }, {
                 where: {
                     id
-                }
+                },
+                returning: true
             });
 
             res.json(updatedList);
