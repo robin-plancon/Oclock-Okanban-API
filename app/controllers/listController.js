@@ -11,7 +11,7 @@ const listController = {
 				},
 				order: [
 					['position', 'ASC'],
-					['cards', 'position', 'DESC'],
+					['cards', 'position', 'ASC'],
 				],
 			});
 			if (!data) {
@@ -49,7 +49,7 @@ const listController = {
 					association: 'cards',
 					include: 'tagCards',
 				},
-				order: [['cards', 'position', 'DESC']],
+				order: [['cards', 'position', 'ASC']],
 			});
 			if (!data) {
 				return res.status(404).json({ error: 'List not found' });

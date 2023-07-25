@@ -16,9 +16,8 @@ const tagController = {
 
 	// Méthode pour créer un tag
 	async createTag(req, res) {
-		const { name } = req.body;
 		try {
-			const data = await Tag.create({ name });
+			const data = await Tag.create({ ...req.body });
 			if (!data) {
 				return res.status(400).json({ error: 'Tag not created' });
 			}
@@ -45,11 +44,10 @@ const tagController = {
 	// Méthode pour mettre à jour un tag
 	async updateTag(req, res) {
 		const { id } = req.params;
-		const { name } = req.body;
 		try {
 			const data = await Tag.update(
 				{
-					name,
+					...req.body,
 				},
 				{
 					where: { id },
@@ -82,7 +80,8 @@ const tagController = {
 
 	// Méthode pour ajouter un tag à une carte
 	async addTagToCard(req, res) {
-		const { id, tagId } = req.params;
+		const { id } = req.params;
+		const { tagId } = req.body;
 		try {
 			const card = await Card.findByPk(id);
 			if (!card) {

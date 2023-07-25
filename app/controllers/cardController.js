@@ -6,6 +6,7 @@ const cardController = {
 		try {
 			const data = await Card.findAll({
 				include: 'tagCards',
+				order: [['position', 'ASC']],
 			});
 			if (!data) {
 				return res.status(404).json({ error: 'No cards found' });
@@ -18,13 +19,9 @@ const cardController = {
 
 	// Méthode pour créer une carte
 	async createCard(req, res) {
-		const { name, position, color, list_id} = req.body;
 		try {
 			const data = await Card.create({
-				name,
-				position,
-				color,
-				list_id,
+				...req.body,
 			});
 			if (!data) {
 				return res.status(400).json({ error: 'Card not created' });
@@ -58,6 +55,7 @@ const cardController = {
 			const cards = await Card.findAll({
 				where: { list_id: id },
 				include: 'tagCards',
+				order: [['position', 'ASC']],
 			});
 			if (!cards) {
 				return res.status(404).json({ error: 'No cards found' });
@@ -71,13 +69,10 @@ const cardController = {
 	// Méthode pour mettre à jour une carte
 	async updateCard(req, res) {
 		const { id } = req.params;
-		const { name, position, list_id } = req.body;
 		try {
 			const data = await Card.update(
 				{
-					name,
-					position,
-					list_id,
+					...req.body,
 				},
 				{
 					where: { id },
