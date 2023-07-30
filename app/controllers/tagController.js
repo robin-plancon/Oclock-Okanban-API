@@ -51,6 +51,7 @@ const tagController = {
 				},
 				{
 					where: { id },
+					returning: true,
 				}
 			);
 			if (!data) {

@@ -76,6 +76,7 @@ const cardController = {
 				},
 				{
 					where: { id },
+					returning: true,
 				}
 			);
 			if (!data) {

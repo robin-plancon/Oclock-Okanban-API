@@ -72,6 +72,7 @@ const listController = {
 				},
 				{
 					where: { id },
+					returning: true,
 				}
 			);
 			if (!data) {
