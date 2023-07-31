@@ -94,7 +94,7 @@ const listController = {
 			if (!data) {
 				return res.status(400).json({ error: 'List not deleted' });
 			}
-			return res.status(204).json({ message: 'List deleted' });
+			return res.status(200).json({ message: 'List deleted' });
 		} catch (error) {
 			return res.status(500).json({ error: error.message });
 		}
