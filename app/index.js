@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+app.use(express.static("./app/assets"));
+
 // Ici, on va configurer nos CORS policy. Pour pas me prendre la tête, je peux mettre simplment "*" en argument, ça autorisera les requêtes de n'importe quelle origine et de n'importe quelle méthode.
 app.use(cors({
     origin: "*"
