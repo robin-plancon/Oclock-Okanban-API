@@ -64,7 +64,7 @@ const controller = {
                 },
                 order: [
                     // Je dis à Sequelize d'organiser mes listes dans un ordre croissant selon leur position (la propriété position).
-                    ['position', 'ASC'],
+                    ['position', 'DESC'],
                     // Même chose, mais pour les cartes. Je précise le tableau à trier en rajoutant un troisième paramètre (rajouté en première position).
                     ['cards', 'position', 'ASC']
                 ]
